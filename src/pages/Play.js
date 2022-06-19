@@ -117,7 +117,7 @@ function Board() {
     status = `Next Player ${state.xIsNext ? location.state.playyerone : location.state.playyertwo}`;
   }
 
-  function playAgin() {
+  function playAgain() {
     setState({ squares: Array(9).fill(null), xIsNext: false });
   }
 
@@ -140,8 +140,8 @@ function Board() {
         {renderSquare(8)}
       </div>
 
-      <button className="playAgin" onClick={playAgin}>
-        playAgin
+      <button className="playAgain" onClick={playAgain}>
+        playAgain
       </button>
     </div>
   );
