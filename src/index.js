@@ -1,64 +1,26 @@
-import {BrowserRouter as Router ,Route} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./pages/Home";
-import Play from "./pages/Play"
-  
+import Play from "./pages/Play";
+import React from "react";
+import ReactDom from "react-dom/client";
 
-function App(){return (
-
-  <Router>
-    <Route exact path="/Home" Component={Home}/>
-    <Route exact path="/Play" Component={Play}/>
-  
-  
-  </Router>
-
-
-
-
-
+function App() {
+  return (
+    <Router>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/play" component={Play} />
+      </Switch>
+    </Router>
   );
 }
- 
-   export default App; 
+
+export default App;
 
 
-
-
-
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+const realDom = document.getElementById("root");
+const root = ReactDom.createRoot(realDom);
+root.render(<App />);
 
 
 // import React, { Component } from "react";
@@ -85,8 +47,7 @@ function App(){return (
 //   }
 //   return null;
 // }
- 
-// const realDom = document.getElementById("root");
+
 
 // // class Square extends Component {
 // //   // constructor(props) {
@@ -130,8 +91,7 @@ function App(){return (
 //   if (calculateWinner(squareCopy) || squareCopy[i]){
 //     return
 //   }
-  
-  
+
 //   squareCopy[i]=this.state.xIsNext ? "x":"o"
 //   this.setState({
 //     squares :squareCopy,
@@ -140,27 +100,25 @@ function App(){return (
 // }
 
 //   renderSquare(i) {
-//     return <Square value={this.state.squares[i]} 
+//     return <Square value={this.state.squares[i]}
 //       onClick={()=>{
 //         this.handleClick(i)
 //       }}
-    
-    
+
 //     />;
 //   }
 
 //   render() {
 //     // const status = `Next Player :${this.state.xIsNext ? "x" : "o"}`
 //     const winner =calculateWinner(this.state.squares)
-//     let status 
+//     let status
 //     if (winner){
 //       status =`Winner ${winner}`
-    
+
 //     }else{
 //       status=`Next Player ${this.state.xIsNext ? "x" :"o"}`
 //     }
-    
-    
+
 //     return (
 //       <div>
 //         <div className="status">{status}</div>
@@ -202,4 +160,4 @@ function App(){return (
 //     );
 //   }
 // }
-// ReactDom.render(<Game />, realDom);
+

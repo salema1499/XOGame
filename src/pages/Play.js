@@ -1,7 +1,21 @@
-import React, { Component } from "react";
+//import React, { Component } from "react";
 // import ReactDom from "react-dom";
 import "../index.css";
-// import "../public/xo.jpg"
+import { useLocation } from "react-router-dom";
+import img from "../assets/images/xo.jpg";
+import { Link } from "react-router-dom";
+import { useState } from "react";
+   
+//const location = useLocation();
+// function loi(){
+//   location.state(
+//     playyerone :player1,
+//         playyertwo :player2
+//   )
+// }
+  
+
+    
 
 function calculateWinner(squares) {
   const lines = [
@@ -22,8 +36,6 @@ function calculateWinner(squares) {
   }
   return null;
 }
- 
-// const realDom = document.getElementById("root");
 
 // class Square extends Component {
 //   // constructor(props) {
@@ -45,100 +57,118 @@ function calculateWinner(squares) {
 //     );
 //   }
 // }
-const Square=(props)=>{
-  return(
-    <button className="square"
-    onClick={props.onClick}>{props.value}</button>
-  )
-}
+const Square = (props) => {
+  return (
+    <button className="square" onClick={props.onClick}>
+      {props.value}
+    </button>
+  );
+};
 
-class Board extends Component {
+function Board() {
+  const [state, setState] = useState({
+    squares: Array(9).fill(null),
+    xIsNext: false,
+  });
 
-constructor(props){
-  super(props)
-  this.state={
-    squares :Array(9).fill(null),xIsNext:true
-  }
-}
+  const location = useLocation()
+  console.log(location.state.playyerone);
+ 
 
-handleClick(i){
-  //shallow copy from squares state
-  const squareCopy =this.state.squares.slice()
-  if (calculateWinner(squareCopy) || squareCopy[i]){
-    return
-  }
-  
-  
-  squareCopy[i]=this.state.xIsNext ? "x":"o"
-  this.setState({
-    squares :squareCopy,
-    xIsNext:!this.state.xIsNext
-  })
-}
+  // const {state} = useLocation();
+//const { playyerone:", playyerone } = status;
 
-  renderSquare(i) {
-    return <Square value={this.state.squares[i]} 
-      onClick={()=>{
-        this.handleClick(i)
-      }}
-    
-    
-    />;
-  }
 
-  render() {
-    // const status = `Next Player :${this.state.xIsNext ? "x" : "o"}`
-    const winner =calculateWinner(this.state.squares)
-    let status 
-    if (winner){
-      status =`Winner ${winner}`
-    
-    }else{
-      status=`Next Player ${this.state.xIsNext ? "x" :"o"}`
+  const handleClick = (i) => {
+    //shallow copy from squares state
+    //const hh={squares:Array(9).fill(null),xIsNext:true}}
+
+    const squareCopy = state.squares.slice();
+
+    if (calculateWinner(squareCopy) || squareCopy[i]) {
+      return;
     }
-    
-    
+
+    squareCopy[i] = state.xIsNext ? "x" : "o";
+    setState({
+      squares: squareCopy,
+      xIsNext: !state.xIsNext,
+    });
+  };
+
+  const renderSquare = (i) => {
     return (
-      <div>
-        <div className="status">{status}</div>
-        <div className="board-row">
-          {this.renderSquare(0)}
-          {this.renderSquare(1)}
-          {this.renderSquare(2)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(3)}
-          {this.renderSquare(4)}
-          {this.renderSquare(5)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(6)}
-          {this.renderSquare(7)}
-          {this.renderSquare(8)}
-        </div>
-      </div>
+      <Square
+        value={state.squares[i]}
+        onClick={() => {
+          handleClick(i);
+        }}
+      />
     );
+  };
+
+  //const status = `Next Player :${this.state.xIsNext ? "x" : "o"}`
+
+  const winner = calculateWinner(state.squares);
+  let status;
+  if (winner) {
+    status = `Winner ${state.xIsNext ? location.state.playyerone : location.state.playyertwo}`;
+  } else {
+    status = `Next Player ${state.xIsNext ? location.state.playyerone : location.state.playyertwo}`;
   }
+
+  function playAgin() {
+    setState({ squares: Array(9).fill(null), xIsNext: false });
+  }
+
+  return (
+    <div>
+      <div className="status">{status}</div>
+      <div className="board-row">
+        {renderSquare(0)}
+        {renderSquare(1)}
+        {renderSquare(2)}
+      </div>
+      <div className="board-row">
+        {renderSquare(3)}
+        {renderSquare(4)}
+        {renderSquare(5)}
+      </div>
+      <div className="board-row">
+        {renderSquare(6)}
+        {renderSquare(7)}
+        {renderSquare(8)}
+      </div>
+
+      <button className="playAgin" onClick={playAgin}>
+        playAgin
+      </button>
+    </div>
+  );
 }
 
-class Game extends Component {
-  render() {
-    return (
-      <div className="game">
-          <img src="xo.jpg" className="img"/>
-        <div className="game-bord">
-          <Board />
-        </div>
-        <div className="game-info">
-          <div>
-            {/* status*/}
-            {/* TODO*/}
-          </div>
+function Game() {
+  return (
+    <div className="game">
+      <img src={img} className="img" alt="" />
+      <div className="game-bord">
+        <Board />
+      </div>
+      <div className="game-info">
+        <div>
+          {/* status*/}
+          {/* TODO*/}
         </div>
       </div>
-    );
-  }
+      <button className="backButton">
+        <Link to="/" style={{ color: "white", textDecoration: "none" }}>
+          Back TO Home
+        </Link>
+      </button>
+    </div>
+  );
 }
+
 export default Game;
 
 // ReactDom.render(<Game />, realDom);
