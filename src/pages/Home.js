@@ -29,7 +29,7 @@ const [player2, setPlayer2] = useState('');
       <div className="form">
         <div className="formone">
           <h3>
-            <label>Enter Your First Player :</label>
+            <label><h3>Enter Your First Player (o):</h3></label>
           </h3>
 
           <input  type="text" placeholder="enter your first player" id="firstName"  onChange={(t)=>{setPlayer1(t.target.value)
@@ -37,14 +37,14 @@ const [player2, setPlayer2] = useState('');
         </div>
         <div className="formtwo">
           <h3>
-            <label>Enter Your Second Player :</label>
+            <label><h3>Enter Your Second Player(x) :</h3></label>
           </h3>
           <input type="text" placeholder="enter your second player" id="secondName"  onChange={(t)=>{setPlayer2(t.target.value)}}/>
         </div>
       </div>
       <div className="formbuttom">
         <button  className="backButton2"  id="btn" onClick={handleClick}  disabled={!(player1 && player2)}>
-          Done..go to play
+          Done..go to play  <i class='fab fa-pushed'></i>
         </button>
       </div>
 

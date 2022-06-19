@@ -107,7 +107,10 @@ body {
       padding: 12px 20px; 
     margin: 8px 0; 
       box-sizing: border-box;
-      
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      font-weight: bolder;
+      font-size: large;
+      color:rgb(48, 94, 136); ;
     
   }
   /* .form{
@@ -118,7 +121,8 @@ body {
   .formtwo ,.formone {
 position: relative;
 left: 20%;
-top:100px
+top:100px;
+font-weight: bolder;
 
   }
 

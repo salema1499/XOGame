@@ -89,7 +89,7 @@ function Board() {
       return;
     }
 
-    squareCopy[i] = state.xIsNext ? "x" : "o";
+    squareCopy[i] = state.xIsNext ? "o" : "x";
     setState({
       squares: squareCopy,
       xIsNext: !state.xIsNext,
@@ -112,7 +112,7 @@ function Board() {
   const winner = calculateWinner(state.squares);
   let status;
   if (winner) {
-    status = `Winner ${state.xIsNext ? location.state.playyerone : location.state.playyertwo}`;
+    status = `Winner ${state.xIsNext ? location.state.playyertwo : location.state.playyerone}`;
   } else {
     status = `Next Player ${state.xIsNext ? location.state.playyerone : location.state.playyertwo}`;
   }
@@ -162,7 +162,7 @@ function Game() {
       </div>
       <button className="backButton">
         <Link to="/" style={{ color: "white", textDecoration: "none" }}>
-          Back TO Home
+        <i class='fab fa-pushed'></i>    Back TO Home  
         </Link>
       </button>
     </div>
